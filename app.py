@@ -1,12 +1,15 @@
 # coding=utf8
 
 from datetime import datetime, timedelta
+
 import streamlit as st
+
+M = {0: "零", 1: "一", 2: "二", 3: "三", 4: "四", 5: "五"}
 
 
 def render_page():
     st.set_page_config(page_title="人生 4 倍速", page_icon=":wave:")
-    st.title("人生 4 倍速")
+    st.title(":wave: 人生 4 倍速")
     st.markdown(
         "“人生四倍速”旨在使用一套不同的历法体系，把一个自然年看作“4年”。"
         "这样，现实生活中每一周都对应新历法中的一个月，每个小时皆重要。"
@@ -61,7 +64,7 @@ def convert_to_new(date: datetime):
     new_day = counter % 28 + 1
 
     st.markdown("---")
-    st.subheader(f"第{new_year}年度")
+    st.subheader(f"第{M.get(new_year, new_year)}年度")
     st.header(f"{new_month} 月 {new_day} 日")
     if new_month == 13:
         st.success("每年度的第 13 个月为休息月，记得复盘“这一年”的成果哦！")
