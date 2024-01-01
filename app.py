@@ -2,9 +2,11 @@
 
 from datetime import datetime, timedelta
 
+import pytz
 import streamlit as st
 
 M = {0: "零", 1: "一", 2: "二", 3: "三", 4: "四", 5: "五"}
+TZ_INFO = pytz.timezone("Etc/GMT-8")
 
 
 def render_page():
@@ -24,9 +26,11 @@ def render_guide():
 def pick_date():
     col_date, col_time = st.columns(2)
     with col_date:
-        d1 = st.date_input("请选择日期", datetime.now())
+        d1 = st.date_input("请选择日期", datetime.now(tz=TZ_INFO))
     with col_time:
-        d2 = st.time_input("请选择时间", datetime.now(), step=timedelta(minutes=60))
+        d2 = st.time_input(
+            "请选择时间", datetime.now(tz=TZ_INFO), step=timedelta(minutes=60)
+        )
 
     # 将d2的时间部分与d1的日期部分合并
     new_datetime = datetime.combine(d1, d2)
